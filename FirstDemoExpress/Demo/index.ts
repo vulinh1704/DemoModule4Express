@@ -12,8 +12,6 @@ app.get('/home', (req, res) => {
     res.render('home' , {user : name})
 })
 
-
-
 // app.post('/home', (req, res) => {
 //     console.log(req.body)
 //     res.send(req.body);
