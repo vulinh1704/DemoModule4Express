@@ -7,7 +7,12 @@ const express_1 = __importDefault(require("express"));
 const router_1 = require("./src/router/router");
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const app = (0, express_1.default)();
+mongoose_1.default.set('strictQuery', true);
+mongoose_1.default.connect('mongodb://localhost:27017/demo_dbC09').then(() => {
+    console.log('Connect Database Success');
+});
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 app.use((0, express_fileupload_1.default)({

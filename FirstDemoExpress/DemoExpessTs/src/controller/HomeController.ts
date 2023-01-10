@@ -29,6 +29,32 @@ class HomeController {
             }
         }
     }
+
+
+    showFormEdit = async (req: Request, res: Response) => {
+        let id = req.params.id;
+        let product = await this.productService.findById(id);
+        res.render('products/edit', {product: product});
+    }
+
+    updateProduct = async (req: Request, res: Response) => {
+        let id = req.params.id;
+        let newProduct = req.body;
+        let product = await this.productService.update(id, newProduct);
+        res.redirect(301, '/home');
+    }
+
+    removeProduct = async (req: Request, res: Response) => {
+        let id = req.params.id;
+        let product = await this.productService.remove(id);
+        res.redirect(301, '/home');
+    }
+
+    showFormRemove = async (req: Request, res: Response) => {
+        let id = req.params.id;
+        res.render('products/delete', {id: id});
+    }
+
 }
 
 export default new HomeController();
