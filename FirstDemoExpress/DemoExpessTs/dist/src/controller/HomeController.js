@@ -4,14 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ProductService_1 = __importDefault(require("../service/ProductService"));
+const CategoryService_1 = __importDefault(require("../service/CategoryService"));
 class HomeController {
     constructor() {
         this.showHome = async (req, res) => {
+            console.log(req.session.User);
             let products = await ProductService_1.default.getAll();
             res.render('home', { products: products });
         };
         this.showFormCreate = async (req, res) => {
-            res.render('products/create');
+            let categories = await this.categoryService.getAll();
+            res.render('products/create', { categories: categories });
         };
         this.create = async (req, res) => {
             if (req.files) {
@@ -46,6 +49,7 @@ class HomeController {
             res.render('products/delete', { id: id });
         };
         this.productService = ProductService_1.default;
+        this.categoryService = CategoryService_1.default;
     }
 }
 exports.default = new HomeController();
